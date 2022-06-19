@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 slack_signing_secret = "8e07f2dc80edcad0fd83abb73ba1b2ce"
 message_url = "https://slack.com/api/chat.postMessage"
-token = "xoxb-470864710675-3685068422261-JCe27Io2k5ClJNBkq47ssGpb"
+token = "xoxb-470864710675-3685068422261-RAccnoN7xdozus7ckCyOHg78"
 
 
 @app.route("/health-check")
@@ -22,6 +22,11 @@ def consume_event():
     if message_secure(request):
         payload_json = request.get_json()
         print("log: json payload: " + str(payload_json))
+
+
+
+        if "url_verification" == payload_json.get("type"):
+            return jsonify({"challenge": request.get_json().get("challenge")})
 
         # Payload parsing
         event = payload_json.get("event")
@@ -45,6 +50,9 @@ def consume_event():
                 payload["channel"] = "D03L7T9MD51"
                 payload["text"] = "I would love to hear a secret, but we should talk in a private channel"
                 response = requests.post(message_url, headers=headers, data=json.dumps(payload))
+                print("log: response code: " + str(response.status_code))
+                response_payload = response.json()
+                print("log: " + str(response_payload))
 
             else:
                 print("log: should respond publicly")
@@ -52,6 +60,8 @@ def consume_event():
                 payload["text"] = "I heard my name"
                 response = requests.post(message_url, headers=headers, data=json.dumps(payload))
                 print("log: response code: " + str(response.status_code))
+                response_payload = response.json()
+                print("log: " + str(response_payload))
 
         elif type == "message":
             if "shh" in text:
@@ -61,6 +71,8 @@ def consume_event():
             payload["text"] = "I love sending messages"
             response = requests.post(message_url, headers=headers, data=json.dumps(payload))
             print("log: response code: " + str(response.status_code))
+            response_payload = response.json()
+            print("log: " + str(response_payload))
 
 
         return jsonify({"challenge": request.get_json().get("challenge")})
