@@ -1,7 +1,6 @@
-# Python Slack Starter
+# Python Slack Starter <div style="float: right"> <a href="https://www.buymeacoffee.com/coffeecode6" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> </div>
 
-- This readme is more of a reference page for commands to get the project running and various slack resources.
-  - For a full video based tutorial, see [WATCH_ME](https://youtu.be/uP2T22AXAuA)
+- This readme is more of a reference page for commands to get the project running and various slack resources. For a full video based tutorial that goes through the slack config and code build, see [WATCH_ME](https://youtu.be/uP2T22AXAuA)
 
 ## Project Requirements
 - Python 3.10.0
